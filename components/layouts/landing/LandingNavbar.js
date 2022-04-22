@@ -11,7 +11,8 @@ import LandingNavLinks from './LandingNavLinks';
 
 const navigation = [
   { name: 'Home', href: '/', protected: false },
-  { name: 'Whitelists', href: '/whitelist', protected: true },
+  { name: 'Managed Whitelists', href: '/managed-whitelists', protected: true },
+  { name: 'My Whitelist Spots', href: '/whitelist-spots', protected: true },
 ]
 
 const actions = [
