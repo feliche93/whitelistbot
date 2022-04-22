@@ -1,4 +1,5 @@
 import { useForm } from 'react-hook-form';
+import { useNewMoralisObject, useMoralis } from "react-moralis";
 
 
 export default function New() {
@@ -10,9 +11,38 @@ export default function New() {
     formState: { errors },
   } = useForm();
 
-  const onSubmit = async ({ name, projectLink }) => {
+  const { save } = useNewMoralisObject("Whitelist");
+  const { user } = useMoralis();
 
-    console.log(name, projectLink);
+  const onSubmit = async ({name, projectLink}) => {
+
+    console.log(user.id);
+
+    console.log(name);
+    const data = {
+        'name' : name,
+        'projectLink' : projectLink,
+        'createdBy': user
+        // projectPhoto,
+    };
+
+    // console.log(data);
+
+    save(data, {
+        onSuccess: (whitelist) => {
+            // Execute any logic that should take place after the object is saved.
+            alert("New object created with objectId: " + whitelist.id);
+        },
+        onError: (error) => {
+            // Execute any logic that should take place if the save fails.
+            // error is a Moralis.Error with an error code and message.
+            alert(
+                "Failed to create new object, with error code: " +
+                    error.message
+            );
+        },
+    });
+
   };
 
 
@@ -72,7 +102,7 @@ export default function New() {
                     </div>
                   </div>
                 </div>
-                <div>
+                {/* <div>
                   <label className="block text-sm font-medium text-gray-700">Project Photo</label>
                   <div className="mt-1 flex items-center space-x-5">
                     <span className="inline-block h-12 w-12 rounded-full overflow-hidden bg-gray-100">
@@ -89,7 +119,7 @@ export default function New() {
                         })}
                       />
                   </div>
-                </div>
+                </div> */}
               </form>
             </div>
           </div>
