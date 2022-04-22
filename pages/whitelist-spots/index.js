@@ -5,9 +5,7 @@ export default function Whitelist() {
   return (
     <EmptyWhitelist
       title={'No whitelists found'}
-      description={'Get started by creating a new whitelist.'}
-      buttonLink={'/whitelist/new'}
-      buttonLabel={'Create a new Whitelist'}
+      description={'You are not on any whitelist yet.'}
     />
   )
 }
