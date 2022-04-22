@@ -1,4 +1,21 @@
+import { useForm } from 'react-hook-form';
+
+
 export default function New() {
+
+  const {
+    register,
+    handleSubmit,
+    getValues,
+    formState: { errors },
+  } = useForm();
+
+  const onSubmit = async ({ name, projectLink }) => {
+
+    console.log(name, projectLink);
+  };
+
+
   return (
     <>
       <div className="py-5 border-b border-gray-200">
@@ -14,7 +31,7 @@ export default function New() {
               </p>
             </div>
             <div className="mt-5 md:mt-0 md:col-span-2">
-              <form className="space-y-6" action="#" method="POST">
+              <form id="hook-form" className="space-y-6" onSubmit={handleSubmit(onSubmit)}>
                 <div className="grid grid-cols-3 gap-6">
                   <div className="col-span-3 sm:col-span-2">
                     <label htmlFor="first-name" className="block text-sm font-medium text-gray-700">
@@ -22,10 +39,13 @@ export default function New() {
                     </label>
                     <input
                       type="text"
-                      name="first-name"
-                      id="first-name"
+                      {...register('name', {
+                        required: 'Name is required'
+                      })}
+                      name="name"
+                      id="name"
                       autoComplete="given-name"
-                      className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+                      className="mt-1 focus:ring-blue-500 focus:border-blue-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
                     />
                   </div>
                   <div className="col-span-3 sm:col-span-2">
@@ -37,10 +57,13 @@ export default function New() {
                         http://
                       </span>
                       <input
+                        {...register('projectLink', {
+                          required: 'Project link is required'
+                        })}
                         type="text"
-                        name="company-website"
-                        id="company-website"
-                        className="focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-none rounded-r-md sm:text-sm border-gray-300"
+                        name="projectLink"
+                        id="projectLink"
+                        className="focus:ring-blue-500 focus:border-blue-500 flex-1 block w-full rounded-none rounded-r-md sm:text-sm border-gray-300"
                         placeholder="www.example.com"
                       />
                     </div>
@@ -57,12 +80,14 @@ export default function New() {
                         <path d="M24 20.993V24H0v-2.996A14.977 14.977 0 0112.004 15c4.904 0 9.26 2.354 11.996 5.993zM16.002 8.999a4 4 0 11-8 0 4 4 0 018 0z" />
                       </svg>
                     </span>
-                    <button
-                      type="button"
-                      className="bg-white py-2 px-3 border border-gray-300 rounded-md shadow-sm text-sm leading-4 font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-                    >
-                      Change
-                    </button>
+                    <input
+                      className="form-control block px-3 py-1.5 text-sm font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                      type="file"
+                      id="formFile"
+                      {...register('projectPhoto', {
+                          required: 'Project Photo is required'
+                        })}
+                      />
                   </div>
                 </div>
               </form>
@@ -72,14 +97,15 @@ export default function New() {
 
         <div className="flex justify-end">
           <button
-            type="button"
-            className="bg-white py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+            type="submit"
+            className="bg-white py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
           >
             Cancel
           </button>
           <button
-            type="submit"
-            className="ml-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+            type='submit'
+            form="hook-form"
+            className="ml-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
           >
             Save
           </button>
