@@ -1,11 +1,22 @@
 import Link from "next/link"
+import { useMoralisQuery, useMoralis } from 'react-moralis';
+import Router from "next/router";
 
-const whitelists = [
-  { name: 'DAO Genesis Token', projectLink: 'www.datadrivendao.xyz', walletsWhitelisted: 10 },
-  // More whitelists...
-]
+// const whitelists = [
+//   { name: 'DAO Genesis Token', projectLink: 'www.datadrivendao.xyz', walletsWhitelisted: 10 },
+//   // More whitelists...
+// ]
 
-export default function ManagedWhitelits() {
+export default function ManagedWhitelits({ whitelists }) {
+
+  const { data, error, isLoading } = useMoralisQuery('Whitelist');
+
+  function deleteWhitelist(whitelist) {
+
+  }
+
+  console.log(whitelists);
+
   return (
     <div className="px-4 py-5 sm:px-6 lg:px-8">
       <div className="sm:flex sm:items-center">
@@ -49,20 +60,26 @@ export default function ManagedWhitelits() {
           </thead>
           <tbody className="divide-y divide-gray-200 bg-white">
             {whitelists.map((whitelist) => (
-              <tr key={whitelist.name}>
+              <tr key={whitelist.get("name")}>
                 <td className="w-full max-w-0 py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:w-auto sm:max-w-none sm:pl-6">
-                  {whitelist.name}
+                  {whitelist.get("name")}
                   <dl className="font-normal lg:hidden">
                     <dt className="sr-only">Project Link</dt>
-                    <dd className="mt-1 truncate text-gray-700">{whitelist.projectLink}</dd>
+                    <dd className="mt-1 truncate text-gray-700">{whitelist.get("projectLink")}</dd>
                   </dl>
                 </td>
-                <td className="hidden px-3 py-4 text-sm text-gray-500 lg:table-cell">{whitelist.projectLink}</td>
-                <td className="px-3 py-4 text-sm text-gray-500">{whitelist.walletsWhitelisted}</td>
-                <td className="py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
+                <td className="hidden px-3 py-4 text-sm text-gray-500 lg:table-cell">{whitelist.get("projectLink")}</td>
+                <td className="px-3 py-4 text-sm text-gray-500">{whitelist.get("walletsWhitelisted")}</td>
+                <td className="py-4 px-2 text-right text-sm font-medium sm:pr-6">
                   <a href="#" className="text-blue-600 hover:text-blue-900">
-                    Edit<span className="sr-only">, {whitelist.name}</span>
+                    Edit<span className="sr-only">, {whitelist.get("name")}</span>
                   </a>
+                </td>
+                <td className="py-4 px-2 text-right text-sm font-medium sm:pr-6">
+                  <button onClick={() => { whitelist.destroy().then(Router.reload)}}
+                    className="text-red-600 hover:text-red-900">
+                    Delete
+                  </button>
                 </td>
               </tr>
             ))}
