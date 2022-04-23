@@ -14,24 +14,24 @@
   }
   ```
 */
-import { PlusSmIcon } from '@heroicons/react/solid'
+import { MinusCircleIcon } from '@heroicons/react/solid'
+import Blockies from "react-blockies";
+
+
 
 const people = [
   {
-    name: 'Lindsay Walton',
-    role: 'Front-end Developer',
+    name: '0xA7828C5BAb02C879Ceb555F567d1833b34E1402B',
     imageUrl:
       'https://images.unsplash.com/photo-1517841905240-472988babdf9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
   },
   {
-    name: 'Courtney Henry',
-    role: 'Designer',
+    name: '0x53719994Ff1daeBac6529B5AB51fccdf14015719',
     imageUrl:
       'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
   },
   {
-    name: 'Tom Cook',
-    role: 'Director, Product Development',
+    name: '0xF012dA9334ecFB27F1005236d34477A8C29B4519',
     imageUrl:
       'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
   },
@@ -89,10 +89,15 @@ export default function AddWallet() {
             <li key={personIdx} className="py-4 flex items-center justify-between space-x-3">
               <div className="min-w-0 flex-1 flex items-center space-x-3">
                 <div className="flex-shrink-0">
-                  <img className="h-10 w-10 rounded-full" src={person.imageUrl} alt="" />
+                <Blockies
+                          seed={person.imageUrl}
+                          size={5}
+                          scale={8}
+                          className="rounded-xl"
+                        />
                 </div>
                 <div className="min-w-0 flex-1">
-                  <p className="text-sm font-medium text-gray-900 truncate">{person.name}</p>
+                  <p className="text-xs font-medium text-gray-900 truncate">{person.name}</p>
                   <p className="text-sm font-medium text-gray-500 truncate">{person.role}</p>
                 </div>
               </div>
@@ -101,7 +106,7 @@ export default function AddWallet() {
                   type="button"
                   className="inline-flex items-center py-2 px-3 border border-transparent rounded-full bg-gray-100 hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
                 >
-                  <PlusSmIcon className="-ml-1 mr-0.5 h-5 w-5 text-gray-400" aria-hidden="true" />
+                  <MinusCircleIcon className="-ml-1 mr-0.5 h-5 w-5 text-gray-400" aria-hidden="true" />
                   <span className="text-sm font-medium text-gray-900">
                     {' '}
                     Remove <span className="sr-only">{person.name}</span>{' '}
