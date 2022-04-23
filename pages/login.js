@@ -36,7 +36,7 @@ export default function Login() {
 
   useEffect(() => {
     if (user) {
-      router.replace('/whitelist');
+      router.replace('/managed-whitelists');
     }
   }, [user]);
 

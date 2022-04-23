@@ -1,8 +1,11 @@
 import { useForm } from 'react-hook-form';
 import { useNewMoralisObject, useMoralis } from "react-moralis";
+import { useRouter } from "next/router";
 
 
 export default function New() {
+
+  const router = useRouter();
 
   const {
     register,
@@ -32,6 +35,7 @@ export default function New() {
         onSuccess: (whitelist) => {
             // Execute any logic that should take place after the object is saved.
             alert("New object created with objectId: " + whitelist.id);
+            router.replace('/managed-whitelists');
         },
         onError: (error) => {
             // Execute any logic that should take place if the save fails.
