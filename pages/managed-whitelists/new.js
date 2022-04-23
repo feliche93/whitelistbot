@@ -1,7 +1,7 @@
 import { useForm } from 'react-hook-form';
 import { useNewMoralisObject, useMoralis } from "react-moralis";
 import { useRouter } from "next/router";
-
+import Link from "next/link";
 
 export default function New() {
 
@@ -17,34 +17,34 @@ export default function New() {
   const { save } = useNewMoralisObject("Whitelist");
   const { user } = useMoralis();
 
-  const onSubmit = async ({name, projectLink}) => {
+  const onSubmit = async ({ name, projectLink }) => {
 
     console.log(user.id);
 
     console.log(name);
     const data = {
-        'name' : name,
-        'projectLink' : projectLink,
-        'createdBy': user
-        // projectPhoto,
+      'name': name,
+      'projectLink': projectLink,
+      'createdBy': user
+      // projectPhoto,
     };
 
     // console.log(data);
 
     save(data, {
-        onSuccess: (whitelist) => {
-            // Execute any logic that should take place after the object is saved.
-            alert("New object created with objectId: " + whitelist.id);
-            router.replace('/managed-whitelists');
-        },
-        onError: (error) => {
-            // Execute any logic that should take place if the save fails.
-            // error is a Moralis.Error with an error code and message.
-            alert(
-                "Failed to create new object, with error code: " +
-                    error.message
-            );
-        },
+      onSuccess: (whitelist) => {
+        // Execute any logic that should take place after the object is saved.
+        // alert("New object created with objectId: " + whitelist.id);
+        router.replace('/managed-whitelists');
+      },
+      onError: (error) => {
+        // Execute any logic that should take place if the save fails.
+        // error is a Moralis.Error with an error code and message.
+        alert(
+          "Failed to create new object, with error code: " +
+          error.message
+        );
+      },
     });
 
   };
@@ -130,12 +130,13 @@ export default function New() {
         </div>
 
         <div className="flex justify-end">
-          <button
-            type="submit"
-            className="bg-white py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
-          >
-            Cancel
-          </button>
+          <Link href="/managed-whitelists">
+            <a
+              className="bg-white py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+            >
+              Cancel
+            </a>
+          </Link>
           <button
             type='submit'
             form="hook-form"
