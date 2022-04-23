@@ -76,12 +76,14 @@ export default function ManagedWhitelits({ whitelists }) {
                   </a>
                 </td>
                 <td className="py-4 px-2 text-right text-sm font-medium sm:pr-6">
-                  <a href="#" className="text-blue-600 hover:text-blue-900">
-                    Add Wallet<span className="sr-only">, {whitelist.get("name")}</span>
-                  </a>
+                  <Link href={`managed-whitelists/${whitelist.id}/add-wallet`}>
+                    <a href="#" className="text-blue-600 hover:text-blue-900">
+                      Add Wallet<span className="sr-only">, {whitelist.get("name")}</span>
+                    </a>
+                  </Link>
                 </td>
                 <td className="py-4 px-2 text-right text-sm font-medium sm:pr-6">
-                  <button onClick={() => { whitelist.destroy().then(Router.reload)}}
+                  <button onClick={() => { whitelist.destroy().then(Router.reload) }}
                     className="text-red-600 hover:text-red-900">
                     Delete
                   </button>
